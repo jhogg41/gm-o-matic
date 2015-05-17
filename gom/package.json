@@ -1,9 +1,9 @@
 {
-  "name": "gom",
+  "name": "gm-o-matic",
   "private": true,
   "version": "0.1.0",
   "description": "GM-O-MATIC: Workflow system for freeform downtimes",
-  "repository": "https://github.com/jhogg41/gom",
+  "repository": "https://github.com/jhogg41/gm-o-matic",
   "license": "Other",
   "devDependencies": {
     "karma": "~0.10",
