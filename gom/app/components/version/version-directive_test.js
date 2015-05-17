@@ -1,7 +1,7 @@
 'use strict';
 
-describe('myApp.version module', function() {
-  beforeEach(module('myApp.version'));
+describe('gomApp.version module', function() {
+  beforeEach(module('gomApp.version'));
 
   describe('app-version directive', function() {
     it('should print current version', function() {
