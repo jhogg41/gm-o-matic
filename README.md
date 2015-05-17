@@ -11,5 +11,5 @@ pip install django
 pip install djangorestframework
 2. Change the security key in the gom_server/gom_server/settings.py
 3. Adjust database settings as you wish.
-4. Serve the gom_client directory as web root.
-5. Then point your favourite webstack at gom_server/wsgi.py (I use nginx/uwsgi). Serve as /api, not as root.
+4. Serve the gom_client/app directory as static web root of www.gom.com.
+5. Serve gom_server/wsgi.py as a WSGI webapp at api.gom.com
