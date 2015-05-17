@@ -4,6 +4,12 @@ Tool for handling downtimes for freeform and similar roleplaying games. This too
 Bugs, comments and other requests to jhogg41 .a.t. gmail
 
 # Installation
-1. Install the gom_server django application. The directory env contains a suitable virtualenv.
-2. Make sure to change the security key in the main settings.py file!
-3. Serve the gom_client as web root.
+1. Recommend you create a virtualenv:
+virtualenv env
+source env/bin/activate
+pip install django
+pip install djangorestframework
+2. Change the security key in the gom_server/gom_server/settings.py
+3. Adjust database settings as you wish.
+4. Serve the gom_client directory as web root.
+5. Then point your favourite webstack at gom_server/wsgi.py (I use nginx/uwsgi). Serve as /api, not as root.
