@@ -1,0 +1,7 @@
+<ul>
+   <li ng-repeat="game in games.game_list">
+      <img ng-src="{{game.image}}" ng-alt="{{game.name}}">
+      <p>{{game.description}}
+      <button ng-disabled="game.active">Activate</button>
+   </li>
+</ul>
