@@ -1,0 +1,30 @@
+<h2>{{char.name}} ({{char.player.display_name}})</h2>
+<p><b>Status:</b> {{char.status}}</p>
+
+<!-- Skills, Quirks, Powers etc. -->
+<div ng-repeat="attr in char.attr">
+   <h3>{{attr.title}}</h3>
+   <ul>
+      <li ng-repeat="item in attr.list">
+         <span class="skill-name">{{item.name}}</span>:
+         <span class="skill-value" ng-if="item.has_value">{{item.value}}</span>
+         <span class="skill-comment" ng-if="item.has_comment">{item.comment}}</span>
+      </li>
+   </ul>
+</div>
+
+<!-- Background and Notes -->
+<h3>Background</h3>
+{{item.background}}
+
+<h3>Notes</h3>
+{{item.notes}}
+
+<button ng-if="!char.submitted">Submit!</button>
+
+<!-- GM only -->
+<div ng-if={{user.is_gm(char)}}>
+   <button>Approve!</button>
+   <h3>GM-only Notes</h3>
+   {{item.gm_notes}}
+</div>

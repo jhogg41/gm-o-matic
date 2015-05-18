@@ -4,9 +4,9 @@
 angular.module('gomApp', [
   'ngRoute',
   'gomApp.player_profile',
-  'gomApp.view2',
+  'gomApp.character',
   'gomApp.version'
 ]).
 config(['$routeProvider', function($routeProvider) {
-  $routeProvider.otherwise({redirectTo: '/view1'});
+  $routeProvider.otherwise({redirectTo: '/'});
 }]);
