@@ -1,0 +1,82 @@
+Character Workflow
+==================
+1. In preparation
+USER RW
+GM RO
+USER "SUBMIT" => 2
+2. Awaiting approval
+USER RO
+GM RW
+GM "APPROVE" => 3
+GM "REJECT/RETURN TO USER" => 1
+3. Alive
+USER RO
+GM RW, NOTIFIES USER ON EDIT
+GM "KILL" => 4
+4. Dead
+GM "RESURRECT" => 3
+
+Action Workflow
+===============
+FIXME: NEWS?
+1. In preparation
+USER RW
+GM RO
+USER "SUBMIT TURNSHEET" => 2
+2. Awaiting Assignment [User Display: Awaiting Response]
+USER RO
+GM RW META, NOTES, RESPONSE
+GM "ASSIGN" => 4
+GM "QUERY" => 3
+3. Awaiting Assignment, Awaiting Response [User Display: Requires Additional Information]
+USER RO
+GM RW META, NOTES, RESPONSE
+USER "RESPOND" => 2
+GM "ASSIGN" => 5
+4. Assigned  [User Display: Awaiting Response]
+USER RO
+GM RW META, NOTES, RESPONSE
+GM "QUERY" => 5
+GM "FINISHED" => 6
+GM "FINISHED, GM-TEAM QUERY" => 7
+5. Assigned, Awaiting Response
+USER RO
+GM RW META, NOTES, RESPONSE
+GM "QUERY" => 5
+GM "FINISHED" => 6
+GM "FINISHED, GM-TEAM QUERY" => 7
+USER "RESPOND" => 4
+6. Quality Assurance
+USER RO
+GM RW META, NOTES, RESPONSE
+GM "FAILED" => 4
+GM "PROMOTE TO GM-TEAM QUERY" => 7
+GM "PASSED" => 8
+GM "PUBLISH AND BE DAMNED" => 9
+7. Quality Assurance, GM TEAM
+USER RO
+GM RW META, NOTES, RESPONSE
+CAMPO "PASSED" => 8
+8. Awaiting publishing
+USER RO
+GM "OOPS" => 4
+GM "PUBLISH" => 9
+9. Published
+USER RO
+GM RO
+GM "OOPS" => 4
+
+GM Workflow
+===========
+1. Pre-GM-Meeting: 
+* Ensure Group meta-data is correct
+* Add any additional notes etc.
+* Write provisional responses if desired
+2. GM Meeting:
+* Assign actions
+* Write notes on outcomes
+* Send queries to players
+3. Post-GM-Meeting
+* Write Responses
+* Perform QA
+* Publish all their players actions when ready
