@@ -1,0 +1,17 @@
+<h1>Turnsheet {{turnsheet.name}}</h1>
+
+<h2>Actions</h2>
+<div ng-repeat="action in turnsheet.actions">
+   <h3>{{action.name}}</h3>
+   <input type="textarea" placeholder="Player Action Description"></input>
+   <h4>Characters involved:</h4>
+   <ul ng-repeat="c in action.involved">
+      <li>{{c.name}}</li>
+   </ul>
+   <h4>Inventory involved:</h4>
+   <ul ng-repeat="i in action.inventory">
+      <li>{{i.name}}</li>
+   </ul>
+   <h4>Response</h4>
+   {{action.response}}
+</div>
