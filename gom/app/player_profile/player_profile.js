@@ -1,6 +1,8 @@
 'use strict';
 
-angular.module('gomApp.player_profile', ['ngRoute'])
+angular.module('gomApp.player_profile', [
+   'ngRoute', 'djangoRESTResources'
+])
 
 .config(['$routeProvider', function($routeProvider) {
    $routeProvider.when('/global/:playerName/profile', {
@@ -10,6 +12,11 @@ angular.module('gomApp.player_profile', ['ngRoute'])
    });
 }])
 
-.controller('PlayerCtrl', [function() {
+.controller('PlayerCtrl', ['djResource', function(djResource) {
+   var pctrl = this;
+   var Player = djResource('/api/user/:userId');
 
+   var p = Player.get({userId:1}, function() {
+      pctrl.email = p.email;
+   });
 }]);

@@ -3,6 +3,7 @@
 // Declare app level module which depends on views, and components
 angular.module('gomApp', [
   'ngRoute',
+  'djangoRESTResources',
   'gomApp.player_profile',
   'gomApp.character',
   'gomApp.version'
