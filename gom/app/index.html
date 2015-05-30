@@ -17,6 +17,7 @@
    <link rel="stylesheet" href="css/app.css">
    <script src="bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
 </head>
+
 <body>
 <md-content ng-controller="MetaCtrl as meta">
    <md-toolbar>
@@ -25,9 +26,8 @@
             <i class="material-icons md-36">menu</i>
          </md-button>
          <h1>GM-O-MATIC</h1>
-         <ul>
-            <li><a href="#/global/{{meta.user.username}}/profile">{{meta.user.username}}</a>/{{meta.user.activeChar}}</li>
-         </ul>
+         <span flex></span>
+         <md-button ng-href="#/global/{{meta.user.username}}/profile">{{meta.user.username}}</md-button> / <md-button>{{meta.user.activeChar}}</md-button>
       </div>
    </md-toolbar>
    <section layout="row" flex>

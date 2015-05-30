@@ -5,9 +5,9 @@ angular.module('gomApp', [
    'ngRoute',
    'ngMaterial',
    'djangoRESTResources',
+   'gomApp.player_profile', // Must be before .character for route precedence!
    'gomApp.character',
    'gomApp.meta',
-   'gomApp.player_profile',
 ]).
 config(['$routeProvider', function($routeProvider) {
    $routeProvider.otherwise({redirectTo: '/'});
