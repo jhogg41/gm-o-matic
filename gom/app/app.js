@@ -3,11 +3,11 @@
 // Declare app level module which depends on views, and components
 angular.module('gomApp', [
    'ngRoute',
+   'ngMaterial',
    'djangoRESTResources',
    'gomApp.character',
-   'gomApp.header',
+   'gomApp.meta',
    'gomApp.player_profile',
-   'gomApp.version'
 ]).
 config(['$routeProvider', function($routeProvider) {
    $routeProvider.otherwise({redirectTo: '/'});

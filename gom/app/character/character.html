@@ -23,7 +23,7 @@
 <button ng-if="!char.submitted">Submit!</button>
 
 <!-- GM only -->
-<div ng-if={{user.is_gm(char)}}>
+<div ng-if="user.is_gm(char)">
    <button>Approve!</button>
    <h3>GM-only Notes</h3>
    {{item.gm_notes}}

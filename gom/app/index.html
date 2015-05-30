@@ -11,43 +11,56 @@
    <meta name="viewport" content="width=device-width, initial-scale=1">
    <link rel="stylesheet" href="bower_components/html5-boilerplate/css/normalize.css">
    <link rel="stylesheet" href="bower_components/html5-boilerplate/css/main.css">
+   <link rel="stylesheet" href="bower_components/angular-material/angular-material.css">
+   <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+         rel="stylesheet">
    <link rel="stylesheet" href="css/app.css">
    <script src="bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
 </head>
 <body>
-   <header ng-controller="HeaderCtrl as header">
-      <img src="assets/logo.png" alt="GM-O-MATIC">
-      <ul>
-         <li>{{header.username}}/{{header.char}}</li>
-      </ul>
-   </header>
-   <ul class="menu">
-      <li><a href="#/game">Switch Game</a></li>
-      <li><a href="#/characters">Character List</a></li>
-      <li><a href="#/turnsheet">Turnsheet</a></li>
-      <li><a href="#/workflow">GM Workflow</a></li>
-   </ul>
+<md-content ng-controller="MetaCtrl as meta">
+   <md-toolbar>
+      <div class="md-toolbar-tools">
+         <md-button ng-click="meta.toggleMenu()" class="md-icon-button" aria-label="Menu">
+            <i class="material-icons md-36">menu</i>
+         </md-button>
+         <h1>GM-O-MATIC</h1>
+         <ul>
+            <li><a href="#/global/{{meta.user.username}}/profile">{{meta.user.username}}</a>/{{meta.user.activeChar}}</li>
+         </ul>
+      </div>
+   </md-toolbar>
+   <section layout="row" flex>
+   <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-is-locked-open="$mdMedia('gt-md')" md-component-id="menu">
+      <md-button ng-href="#/game">Switch Game</md-button>
+      <md-button ng-href="#/characters">Character List</md-button>
+      <md-button ng-href="#/turnsheet">Turnsheet</md-button>
+      <md-button ng-href="#/workflow">GM Workflow</md-button>
+   </md-sidenav>
 
+   <md-content flex layout-padding>
    <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
    <![endif]-->
-
    <div ng-view></div>
+   </md-content>
 
-   <div>GM-O-MATIC: v<span app-version></span></div>
+   </section>
+</md-content>
 
-   <!-- In production use:
-   <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
-   -->
-   <script src="bower_components/angular/angular.js"></script>
-   <script src="bower_components/angular-route/angular-route.js"></script>
-   <script src="bower_components/angular-django-rest-resource/angular-django-rest-resource.js"></script>
-   <script src="app.js"></script>
-   <script src="player_profile/player_profile.js"></script>
-   <script src="character/character.js"></script>
-   <script src="header/header.js"></script>
-   <script src="components/version/version.js"></script>
-   <script src="components/version/version-directive.js"></script>
-   <script src="components/version/interpolate-filter.js"></script>
+<!-- Bower-supplied components -->
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-route/angular-route.js"></script>
+<script src="bower_components/angular-django-rest-resource/angular-django-rest-resource.js"></script>
+<script src="bower_components/angular-aria/angular-aria.js"></script>
+<script src="bower_components/angular-animate/angular-animate.js"></script>
+<script src="bower_components/angular-material/angular-material.js"></script>
+
+<!-- GOM app js -->
+<script src="app.js"></script>
+<script src="character/character.js"></script>
+<script src="player_profile/player_profile.js"></script>
+<script src="meta/meta.js"></script>
+
 </body>
 </html>
