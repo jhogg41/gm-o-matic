@@ -18,11 +18,10 @@
    <script src="bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
 </head>
 
-<body>
-<md-content ng-controller="MetaCtrl as meta">
-   <md-toolbar>
+<body layout="column" ng-controller="MetaCtrl as meta">
+   <md-toolbar layout="row">
       <div class="md-toolbar-tools">
-         <md-button ng-click="meta.toggleMenu()" class="md-icon-button" aria-label="Menu">
+         <md-button ng-click="meta.toggleMenu()" class="md-icon-button" aria-label="Menu" hide-gt-md>
             <i class="material-icons md-36">menu</i>
          </md-button>
          <h1>GM-O-MATIC</h1>
@@ -30,37 +29,35 @@
          <md-button ng-href="#/global/{{meta.user.username}}/profile">{{meta.user.username}}</md-button> / <md-button>{{meta.user.activeChar}}</md-button>
       </div>
    </md-toolbar>
-   <section layout="row" flex>
-   <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-is-locked-open="$mdMedia('gt-md')" md-component-id="menu">
+   <div id="main" layout="row" flex>
+   <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-is-locked-open="$mdMedia('gt-md')" md-component-id="menu" layout="column">
       <md-button ng-href="#/game">Switch Game</md-button>
       <md-button ng-href="#/characters">Character List</md-button>
       <md-button ng-href="#/turnsheet">Turnsheet</md-button>
       <md-button ng-href="#/workflow">GM Workflow</md-button>
    </md-sidenav>
 
-   <md-content flex layout-padding>
+   <md-content flex layout="column" id="content" ng-view>
    <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
    <![endif]-->
-   <div ng-view></div>
    </md-content>
 
-   </section>
-</md-content>
+   <!-- Bower-supplied components -->
+   <script src="bower_components/angular/angular.js"></script>
+   <script src="bower_components/angular-route/angular-route.js"></script>
+   <script src="bower_components/angular-django-rest-resource/angular-django-rest-resource.js"></script>
+   <script src="bower_components/angular-aria/angular-aria.js"></script>
+   <script src="bower_components/angular-animate/angular-animate.js"></script>
+   <script src="bower_components/angular-material/angular-material.js"></script>
 
-<!-- Bower-supplied components -->
-<script src="bower_components/angular/angular.js"></script>
-<script src="bower_components/angular-route/angular-route.js"></script>
-<script src="bower_components/angular-django-rest-resource/angular-django-rest-resource.js"></script>
-<script src="bower_components/angular-aria/angular-aria.js"></script>
-<script src="bower_components/angular-animate/angular-animate.js"></script>
-<script src="bower_components/angular-material/angular-material.js"></script>
+   <!-- GOM app js -->
+   <script src="app.js"></script>
+   <script src="character/character.js"></script>
+   <script src="player_profile/player_profile.js"></script>
+   <script src="meta/meta.js"></script>
 
-<!-- GOM app js -->
-<script src="app.js"></script>
-<script src="character/character.js"></script>
-<script src="player_profile/player_profile.js"></script>
-<script src="meta/meta.js"></script>
+   </div>
 
 </body>
 </html>
