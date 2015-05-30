@@ -1,5 +1,6 @@
 *.pyc
 *.log
+*.swp
 /env
 /gom_server/db.sqlite3
 /gom_server/static
