@@ -4,14 +4,18 @@ angular.module('gomApp.meta', [
    'djangoRESTResources'
 ])
 
-.service('MetaService', [function() {
+.factory('GameService', ['djResource', function(djResource) {
+   return djResource('/api/game/:id');
+}])
+
+.service('MetaService', ['$rootScope', 'GameService',
+function($rootScope, GameService) {
    var ms = this;
-   this.game = {
-      'name': 'Crisis'
-   };
-   this.switchGame = function(newName) {
+   this.game = GameService.get({id:1}); // FIXME: Last used game
+   this.switchGame = function(id) {
       // Called to switch game
-      ms.game.name = newName;
+      ms.game = GameService.get({id: id});
+      $rootScope.$broadcast('game:changed', ms.game.id);
    };
    this.user = {
       'username': 'jhogg',
@@ -24,10 +28,16 @@ angular.module('gomApp.meta', [
    };
 }])
 
-.controller('MetaCtrl', ['$mdDialog', '$mdSidenav', '$mdUtil', 'MetaService',
-function($mdDialog, $mdSidenav, $mdUtil, MetaService) {
+.controller('MetaCtrl', [
+'$mdDialog', '$mdSidenav', '$mdUtil', '$scope', 'MetaService',
+function($mdDialog, $mdSidenav, $mdUtil, $scope, MetaService) {
+   var meta = this;
    this.user = MetaService.user;
+   // Current game
    this.game = MetaService.game;
+   $scope.$on('game:changed', function(event, id) {
+      meta.game = MetaService.game;
+   });
 
    this.toggleMenu = $mdUtil.debounce(function(){
       $mdSidenav('menu').toggle();
@@ -45,15 +55,14 @@ function($mdDialog, $mdSidenav, $mdUtil, MetaService) {
    };
 }])
 
-.controller('GameSwitchCtrl', ['$mdDialog', 'djResource', 'MetaService',
-function($mdDialog, djResource, MetaService) {
-   var Games = djResource('/api/game/');
-   this.games = Games.query();
+.controller('GameSwitchCtrl', ['$mdDialog', 'GameService', 'MetaService',
+function($mdDialog, GameService, MetaService) {
+   this.games = GameService.query();
    this.game = MetaService.game.name;
    this.cancel = function() {
       $mdDialog.cancel();
    };
    this.switch = function() {
-      $mdDialog.hide(this.game);
+      $mdDialog.hide(this.game.id);
    };
 }]);
