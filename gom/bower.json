@@ -9,9 +9,12 @@
     "angular": "1.4.x",
     "angular-route": "1.4.x",
     "angular-loader": "1.4.x",
-    "angular-mocks": "~1.4.x",
+    "angular-mocks": "1.4.x",
     "html5-boilerplate": "~4.3.0",
     "angular-django-rest-resource": "latest",
-    "angular-material": "~0.9.6"
+    "angular-material": "~0.9.6",
+    "angular-cookies": "1.4.x",
+    "angular-resource": "1.4.x",
+    "angular-messages": "1.4.x"
   }
 }

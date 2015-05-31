@@ -1,0 +1,32 @@
+<md-tabs md-dynamic-height='true'>
+<md-tab id="login">
+   <md-tab-label>Login</md-tab-label>
+   <md-tab-body>
+   <md-input-container>
+      <label>Username</label>
+      <input ng-model='login.username'>
+   </md-input-container>
+   <md-input-container>
+      <label>Password</label>
+      <input ng-model='login.password' type="password">
+   </md-input-container>
+   <div ng-messages="login.error" role="alert">
+      <div ng-message="failed">Bad username or password</div>
+   </div>
+   <div flex layout='row'>
+      <md-button class='md-raised'>
+         Forgot Password
+      </md-button>
+      <md-button class='md-raised md-primary' ng-click='login.login()'>
+         Login
+      </md-button>
+   </div>
+   </md-tab-body>
+</md-tab>
+<md-tab id="register">
+   <md-tab-label>Register</md-tab-label>
+   <md-tab-body>
+   So I should totally have something here...   
+   </md-tab-body>
+</md-tab>
+</md-tabs>
