@@ -1,6 +1,7 @@
 'use strict';
 
 angular.module('gomApp.meta', [
+   'djangoRESTResources'
 ])
 
 .service('MetaService', [function() {
@@ -44,8 +45,10 @@ function($mdDialog, $mdSidenav, $mdUtil, MetaService) {
    };
 }])
 
-.controller('GameSwitchCtrl', ['$mdDialog', 'MetaService',
-function($mdDialog, MetaService) {
+.controller('GameSwitchCtrl', ['$mdDialog', 'djResource', 'MetaService',
+function($mdDialog, djResource, MetaService) {
+   var Games = djResource('/api/game/');
+   this.games = Games.query();
    this.game = MetaService.game.name;
    this.cancel = function() {
       $mdDialog.cancel();
