@@ -44,6 +44,7 @@ INSTALLED_APPS = (
     'rest_auth',
     # GOM code
     'core',
+    'char_attr',
 )
 
 MIDDLEWARE_CLASSES = (
