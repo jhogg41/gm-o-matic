@@ -11,7 +11,7 @@ angular.module('gomApp.meta', [
 .service('MetaService', ['$rootScope', 'GameService',
 function($rootScope, GameService) {
    var ms = this;
-   this.game = GameService.get({id:1}); // FIXME: Last used game
+   this.game = null; // FIXME: Set to last used game
    this.switchGame = function(id) {
       // Called to switch game
       ms.game = GameService.get({id: id});
@@ -58,11 +58,11 @@ function($mdDialog, $mdSidenav, $mdUtil, $scope, MetaService) {
 .controller('GameSwitchCtrl', ['$mdDialog', 'GameService', 'MetaService',
 function($mdDialog, GameService, MetaService) {
    this.games = GameService.query();
-   this.game = MetaService.game.name;
+   this.game = MetaService.game ? MetaService.game.id : 0;
    this.cancel = function() {
       $mdDialog.cancel();
    };
    this.switch = function() {
-      $mdDialog.hide(this.game.id);
+      $mdDialog.hide(this.game);
    };
 }]);

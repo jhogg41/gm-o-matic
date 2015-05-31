@@ -2,7 +2,7 @@
    <md-dialog-content>
       <md-subheader>Select Game</md-subheader>
       <md-radio-group ng-model="gsw.game">
-         <md-radio-button ng-repeat="game in gsw.games" ng-value="game">{{game.name}}</md-radio-button>
+         <md-radio-button ng-repeat="game in gsw.games" ng-value="game.id">{{game.name}}</md-radio-button>
       </md-radio-group>
    </md-dialog-content>
    <div class="md-actions" layout="row">
