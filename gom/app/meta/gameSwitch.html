@@ -1,0 +1,13 @@
+<md-dialog aria-label="Select Game">
+   <md-dialog-content>
+      <md-subheader>Select Game</md-subheader>
+      <md-radio-group ng-model="gsw.game">
+         <md-radio-button value="Crisis">Crisis</md-radio-button>
+         <md-radio-button value="Wolf Drop">Wolf Drop</md-radio-button>
+      </md-radio-group>
+   </md-dialog-content>
+   <div class="md-actions" layout="row">
+      <md-button class="md-raised" ng-click="gsw.cancel()">Cancel</md-button>
+      <md-button class="md-raised md-primary" ng-click="gsw.switch()">Switch</md-button>
+   </div>
+</md-dialog>
