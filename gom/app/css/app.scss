@@ -7,3 +7,19 @@
 
 /* Ensure sidenav sits below toolbar */
 div#main { position: relative; }
+
+/* Ensure game select button displays correctly */
+.game-button {
+   position: relative;
+   top: -10px;
+   h1 {
+      display: inline;
+      font-size: 250%;
+   }
+   i.material-icons {
+      font-size: 48px;
+      margin-left: -12px;
+      position: relative;
+      top: 12px;
+   }
+}

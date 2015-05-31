@@ -9,7 +9,7 @@ function($mdUtil, $mdSidenav) {
       'username': 'jhogg',
       'activeChar': 'Fred Bloggs'
    };
-   this.activeGame = "crisis";
+   this.activeGame = "Crisis";
    this.user.is_gm = function(character) {
       // Return true is this user has GM permissions on the game of given
       // character.

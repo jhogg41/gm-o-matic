@@ -8,7 +8,12 @@ angular.module('gomApp', [
    'gomApp.player_profile', // Must be before .character for route precedence!
    'gomApp.character',
    'gomApp.meta',
-]).
-config(['$routeProvider', function($routeProvider) {
+])
+.config(['$routeProvider', function($routeProvider) {
    $routeProvider.otherwise({redirectTo: '/'});
+}])
+.config(['$mdThemingProvider', function($mdThemingProvider) {
+   $mdThemingProvider.theme('default')
+      .primaryPalette('green')
+      .accentPalette('amber');
 }]);

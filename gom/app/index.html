@@ -24,7 +24,10 @@
          <md-button ng-click="meta.toggleMenu()" class="md-icon-button" aria-label="Menu" hide-gt-md>
             <i class="material-icons md-36">menu</i>
          </md-button>
-         <h1>GM-O-MATIC</h1>
+         <md-button class="game-button" ng-click="meta.gameSwitcher()" aria-label="Switch Game">
+            <h1>{{meta.activeGame}}</h1>
+            <i class="material-icons">arrow_drop_down</i>
+         </md-button>
          <span flex></span>
          <md-button ng-href="#/global/{{meta.user.username}}/profile">{{meta.user.username}}</md-button> / <md-button>{{meta.user.activeChar}}</md-button>
       </div>
