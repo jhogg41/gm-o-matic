@@ -30,7 +30,16 @@
             <i class="material-icons">arrow_drop_down</i>
          </md-button>
          <span flex></span>
-         <md-button ng-href="#/global/{{meta.user.username}}/profile">{{meta.user.username}}</md-button> / <md-button>{{meta.user.activeChar}}</md-button>
+         <h2 ng-if="!meta.user">NOT LOGGED IN</h2>
+         <div ng-show="meta.user">
+            <md-button ng-href="#/global/{{meta.user.username}}/profile" class="profile-button">
+               <span>{{meta.user.username}}</span>
+               <i class="material-icons md-36">person</i>
+            </md-button> 
+            <md-button class="md-icon-button logout-button" aria-label="Logout">
+               <i class="material-icons md-36">exit_to_app</i>
+            </md-button>
+         </div>
       </div>
    </md-toolbar>
    <div id="main" layout="row" flex>

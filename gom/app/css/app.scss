@@ -8,7 +8,7 @@
 /* Ensure sidenav sits below toolbar */
 div#main { position: relative; }
 
-/* Ensure game select button displays correctly */
+/* Ensure toolbar buttons display correctly */
 .game-button {
    position: relative;
    top: -10px;
@@ -22,4 +22,21 @@ div#main { position: relative; }
       position: relative;
       top: 12px;
    }
+}
+.profile-button {
+   position: relative;
+   top: -5px;
+   span {
+      font-size: 150%;
+   }
+   i.material-icons {
+      font-size: 48px;
+      margin-left: -8px;
+      position: relative;
+      top: 15px;
+   }
+}
+.logout-button {
+   position: relative;
+   top: -8px;
 }

@@ -17,15 +17,17 @@ function($rootScope, GameService) {
       ms.game = GameService.get({id: id});
       $rootScope.$broadcast('game:changed', ms.game.id);
    };
-   this.user = {
+   this.user = null;/*{
       'username': 'jhogg',
       'activeChar': 'Fred Bloggs'
-   };
-   this.user.is_gm = function(character) {
-      // Return true is this user has GM permissions on the game of given
-      // character.
-      return true;
-   };
+   };*/
+   if(this.user) {
+      this.user.is_gm = function(character) {
+         // Return true is this user has GM permissions on the game of given
+         // character.
+         return true;
+      };
+   }
 }])
 
 .controller('MetaCtrl', [
