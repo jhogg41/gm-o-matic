@@ -1,15 +1,15 @@
 'use strict';
 
 angular.module('gomApp.meta', [
-   'djangoRESTResources'
+   'djangoRESTResources', 'gomApp.user'
 ])
 
 .factory('GameService', ['djResource', function(djResource) {
    return djResource('/api/game/:id');
 }])
 
-.service('MetaService', ['$rootScope', 'GameService',
-function($rootScope, GameService) {
+.service('MetaService', ['$rootScope', 'GameService', 'UserService',
+function($rootScope, GameService, UserService) {
    var ms = this;
    this.game = null; // FIXME: Set to last used game
    this.switchGame = function(id) {
@@ -17,34 +17,27 @@ function($rootScope, GameService) {
       ms.game = GameService.get({id: id});
       $rootScope.$broadcast('game:changed', ms.game.id);
    };
-   this.user = null;/*{
-      'username': 'jhogg',
-      'activeChar': 'Fred Bloggs'
-   };*/
-   if(this.user) {
-      this.user.is_gm = function(character) {
-         // Return true is this user has GM permissions on the game of given
-         // character.
-         return true;
-      };
-   }
 }])
 
 .controller('MetaCtrl', [
-'$mdDialog', '$mdSidenav', '$mdUtil', '$scope', 'MetaService',
-function($mdDialog, $mdSidenav, $mdUtil, $scope, MetaService) {
+'$mdDialog', '$mdSidenav', '$mdUtil', '$scope', 'AuthService', 'MetaService', 'UserService',
+function($mdDialog, $mdSidenav, $mdUtil, $scope, AuthService, MetaService, UserService) {
    var meta = this;
-   this.user = MetaService.user;
+   // Current user
+   meta.user = UserService.user;
+   $scope.$on('user:change', function(event, id) {
+      meta.user = UserService.user;
+   });
    // Current game
-   this.game = MetaService.game;
+   meta.game = MetaService.game;
    $scope.$on('game:changed', function(event, id) {
       meta.game = MetaService.game;
    });
 
-   this.toggleMenu = $mdUtil.debounce(function(){
+   meta.toggleMenu = $mdUtil.debounce(function(){
       $mdSidenav('menu').toggle();
    });
-   this.gameSwitcher = function(){
+   meta.gameSwitcher = function(){
       $mdDialog.show({
          clickOutsideToClose: 'true',
          controller: 'GameSwitchCtrl',
@@ -54,6 +47,9 @@ function($mdDialog, $mdSidenav, $mdUtil, $scope, MetaService) {
       .then(function(game) {
          MetaService.switchGame(game);
       });
+   };
+   meta.logout = function() {
+      AuthService.logout();
    };
 }])
 

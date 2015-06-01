@@ -15,7 +15,7 @@ angular.module('gomApp.user', [
 
 .controller('LoginCtrl', ['AuthService', function(AuthService) {
    var lc = this;
-   this.username = '';
+   this.username = AuthService.username;
    this.password = '';
    this.login = function() {
       AuthService.login(lc.username, lc.password,
@@ -33,8 +33,8 @@ angular.module('gomApp.user', [
 }])
 
 .service('AuthService', [
-'$cookies', '$resource',
-function($cookies, $resource) {
+'$cookies', '$http', '$resource', '$rootScope',
+function($cookies, $http, $resource, $rootScope) {
    var auth = this;
    var AuthAPI = $resource('/api/rest-auth\\/', {}, {
       login:  { 
@@ -46,12 +46,16 @@ function($cookies, $resource) {
          url: '/api/rest-auth/logout\\/'
       }
    });
-   this.key = null;
    this.login = function(username, password, success, error) {
       AuthAPI.login({username:username, password:password},
          function(response) {
             if(response.key) {
+               auth.username = username;
                auth.key = response.key;
+               auth.setHeaders();
+               $cookies.put('auth:username', auth.username); 
+               $cookies.put('auth:key', auth.key); 
+               $rootScope.$broadcast('auth:login', auth.username);
                if(success) success();
             } else {
                if(error) error('Unknown error: login succesful but no key supplied');
@@ -66,10 +70,58 @@ function($cookies, $resource) {
          }
       );
    };
+   this.logout = function() {
+      var out_username = auth.username;
+      auth.username = null;
+      auth.key = null;
+      auth.setHeaders();
+      $cookies.remove('auth:key');
+      $rootScope.$broadcast('auth:logout', out_username);
+   };
+   this.setHeaders = function() {
+      if(auth.key) {
+         $http.defaults.headers.common.Authorization = 'Token ' + auth.key;
+      } else {
+         $http.defaults.headers.common.Authorization = undefined;
+      }
+   };
+
+   auth.username = $cookies.get('auth:username');
+   auth.key      = $cookies.get('auth:key');
+   auth.authenticated = function() { return auth.username && auth.key; };
+   if(auth.key) auth.setHeaders();
 }])
 
 .service('UserService', [
-'djResource',
-function(djResource) {
-   var UserResource = djResource('/api/user/:id');
+'$rootScope', 'djResource', 'AuthService',
+function($rootScope, djResource, AuthService) {
+   var userSrv = this;
+   //var UserResource = djResource('/api/user/:username');
+
+   // Functions
+   userSrv.setUser = function(username) {
+      if(username) {
+         userSrv.user = {
+            username: username
+         };
+         userSrv.user.is_gm = function(character) {
+            // Return true is this user has GM permissions on the game of given
+            // character.
+            return true;
+         };
+      } else {
+         userSrv.user = null;
+      }
+      $rootScope.$broadcast('user:change', userSrv.user);
+   };
+
+   // Initialization
+   if(AuthService.authenticated()) userSrv.setUser(AuthService.username);
+   else                            userSrv.setUser(null);
+   $rootScope.$on('auth:login', function(event, username) {
+      userSrv.setUser(username);
+   });
+   $rootScope.$on('auth:logout', function(event, username) {
+      userSrv.setUser(null);
+   });
 }]);

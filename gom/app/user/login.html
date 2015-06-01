@@ -1,7 +1,7 @@
 <md-tabs md-dynamic-height='true'>
 <md-tab id="login">
    <md-tab-label>Login</md-tab-label>
-   <md-tab-body>
+   <md-tab-body><form>
    <md-input-container>
       <label>Username</label>
       <input ng-model='login.username'>
@@ -14,14 +14,14 @@
       <div ng-message="failed">Bad username or password</div>
    </div>
    <div flex layout='row'>
-      <md-button class='md-raised'>
+      <md-button class='md-raised' type='button'>
          Forgot Password
       </md-button>
-      <md-button class='md-raised md-primary' ng-click='login.login()'>
+      <md-button class='md-raised md-primary' ng-click='login.login()' type='submit'>
          Login
       </md-button>
    </div>
-   </md-tab-body>
+   </form></md-tab-body>
 </md-tab>
 <md-tab id="register">
    <md-tab-label>Register</md-tab-label>
