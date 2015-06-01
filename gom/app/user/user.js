@@ -18,7 +18,12 @@ angular.module('gomApp.user', [
 function($location, AuthService) {
    var lc = this;
    this.username = AuthService.username;
+   this.name = '';
    this.password = '';
+   this.password2 = '';
+   this.email = '';
+   this.terms = false;
+   this.cat = false;
    this.login = function() {
       AuthService.login(lc.username, lc.password,
          function() {
@@ -28,6 +33,9 @@ function($location, AuthService) {
             lc.error.failed = true;
          }
       );
+   };
+   this.register = function() {
+      window.alert('Register!\n');
    };
    this.error = {
       failed: false

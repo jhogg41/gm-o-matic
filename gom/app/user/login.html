@@ -8,7 +8,7 @@
    </md-input-container>
    <md-input-container>
       <label>Password</label>
-      <input ng-model='login.password' type="password">
+      <input ng-model='login.password' type='password'>
    </md-input-container>
    <div ng-messages="login.error" role="alert">
       <div ng-message="failed">Bad username or password</div>
@@ -25,8 +25,38 @@
 </md-tab>
 <md-tab id="register">
    <md-tab-label>Register</md-tab-label>
-   <md-tab-body>
-   So I should totally have something here...   
-   </md-tab-body>
+   <md-tab-body><form>
+   <md-input-container>
+      <label>Username</label>
+      <input ng-model='login.username'>
+   </md-input-container>
+   <md-input-container>
+      <label>Real name (so GMs know who you are)</label>
+      <input ng-model='login.name'>
+   </md-input-container>
+   <md-input-container>
+      <label>Email</label>
+      <input ng-model='login.email' type='email'>
+   </md-input-container>
+   <md-input-container>
+      <label>Password</label>
+      <input ng-model='login.password' type='password'>
+   </md-input-container>
+   <md-input-container>
+      <label>Verify Password</label>
+      <input ng-model='login.password2' type='password'>
+   </md-input-container>
+   <md-checkbox ng-model='login.terms' aria-label='Agree to Terms and Conditions'>
+      I agree to the website <a href='/terms'>Terms and Conditions</a>
+   </md-checkbox>
+   <md-checkbox ng-model='login.cat' aria-label='Agree to CAT Policy'>
+      I agree to abide by the OURPGSoc <a href='http://users.ox.ac.uk/~rpgsoc/policies.shtml'>Conduct and Acceptable Themes (CAT) Policy</a>
+   </md-checkbox>
+   <div flex layout='row'>
+      <md-button class='md-raised md-primary' ng-click='login.register()' type='submit'>
+         Register
+      </md-button>
+   </div>
+   </form></md-tab-body>
 </md-tab>
 </md-tabs>
