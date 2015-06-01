@@ -13,14 +13,16 @@ angular.module('gomApp.user', [
    });
 }])
 
-.controller('LoginCtrl', ['AuthService', function(AuthService) {
+.controller('LoginCtrl', [
+'$location', 'AuthService',
+function($location, AuthService) {
    var lc = this;
    this.username = AuthService.username;
    this.password = '';
    this.login = function() {
       AuthService.login(lc.username, lc.password,
          function() {
-            window.alert("I win");
+            $location.url('/');
          },
          function(msg) {
             lc.error.failed = true;
