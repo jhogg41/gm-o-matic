@@ -5,6 +5,9 @@ angular.module('gomApp.user', [
    'ngCookies', 'ngResource', 'ngRoute', 'djangoRESTResources'
 ])
 
+/*********************************************************
+ * Routes
+ *********************************************************/
 .config(['$routeProvider', function($routeProvider) {
    $routeProvider.when('/login', {
       templateUrl: 'user/login.html',
@@ -21,6 +24,9 @@ angular.module('gomApp.user', [
    });
 }])
 
+/*********************************************************
+ * Controllers
+ *********************************************************/
 .controller('LoginCtrl', [
 '$location', 'AuthService',
 function($location, AuthService) {
@@ -56,6 +62,9 @@ function(UserService) {
    this.user = UserService.user;
 }])
 
+/*********************************************************
+ * Services
+ *********************************************************/
 .service('AuthService', [
 '$cookies', '$http', '$resource', '$rootScope',
 function($cookies, $http, $resource, $rootScope) {
