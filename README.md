@@ -10,6 +10,7 @@ source env/bin/activate
 pip install django
 pip install djangorestframework
 pip install django-rest-auth
+pip install django-allauth
 2. Change the security key in the gom_server/gom_server/settings.py
 3. Adjust database settings as you wish. Run ./manage.py migrate to instantiate.
 4. Serve the gom_client/app directory as static web root of www.gom.com.

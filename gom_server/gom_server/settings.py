@@ -39,9 +39,12 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Third-part frameworks
+    'allauth',
+    'allauth.account',
     'rest_framework',
     'rest_framework.authtoken',
     'rest_auth',
+    'rest_auth.registration',
     # GOM code
     'core',
     'char_attr',
