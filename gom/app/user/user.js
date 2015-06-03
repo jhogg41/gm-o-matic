@@ -13,6 +13,14 @@ angular.module('gomApp.user', [
    });
 }])
 
+.config(['$routeProvider', function($routeProvider) {
+   $routeProvider.when('/profile', {
+      templateUrl: 'user/profile.html',
+      controller: 'ProfileCtrl',
+      controllerAs: 'profile',
+   });
+}])
+
 .controller('LoginCtrl', [
 '$location', 'AuthService',
 function($location, AuthService) {
@@ -40,6 +48,12 @@ function($location, AuthService) {
    this.error = {
       failed: false
    };
+}])
+
+.controller('ProfileCtrl', [
+'UserService',
+function(UserService) {
+   this.user = UserService.user;
 }])
 
 .service('AuthService', [
@@ -106,14 +120,12 @@ function($cookies, $http, $resource, $rootScope) {
 '$rootScope', 'djResource', 'AuthService',
 function($rootScope, djResource, AuthService) {
    var userSrv = this;
-   //var UserResource = djResource('/api/user/:username');
 
    // Functions
    userSrv.setUser = function(username) {
+      var userResource = djResource('/api/user/:username');
       if(username) {
-         userSrv.user = {
-            username: username
-         };
+         userSrv.user = userResource.get({username: username});
          userSrv.user.is_gm = function(character) {
             // Return true is this user has GM permissions on the game of given
             // character.

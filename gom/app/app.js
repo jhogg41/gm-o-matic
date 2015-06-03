@@ -6,7 +6,6 @@ angular.module('gomApp', [
    'ngMaterial',
    'ngMessages',
    'djangoRESTResources',
-   'gomApp.player_profile', // Must be before .character for route precedence!
    'gomApp.character',
    'gomApp.meta',
    'gomApp.user',
@@ -17,5 +16,5 @@ angular.module('gomApp', [
 .config(['$mdThemingProvider', function($mdThemingProvider) {
    $mdThemingProvider.theme('default')
       .primaryPalette('green')
-      .accentPalette('amber');
+      .accentPalette('indigo');
 }]);

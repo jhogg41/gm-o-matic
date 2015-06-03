@@ -30,9 +30,9 @@
             <i class="material-icons">arrow_drop_down</i>
          </md-button>
          <span flex></span>
-         <h2 ng-if="!meta.user">NOT LOGGED IN</h2>
+         <md-button ng-href="/#/login" ng-if="!meta.user">LOG IN</md-button>
          <div ng-show="meta.user">
-            <md-button ng-href="#/global/{{meta.user.username}}/profile" class="profile-button">
+            <md-button ng-href="/#/profile" class="profile-button">
                <span>{{meta.user.username}}</span>
                <i class="material-icons md-36">person</i>
             </md-button> 
@@ -69,7 +69,6 @@
    <!-- GOM app js -->
    <script src="app.js"></script>
    <script src="character/character.js"></script>
-   <script src="player_profile/player_profile.js"></script>
    <script src="meta/meta.js"></script>
    <script src="user/user.js"></script>
 
