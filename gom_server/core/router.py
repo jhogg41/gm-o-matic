@@ -11,9 +11,12 @@ class GameSerializer(serializers.ModelSerializer):
    class Meta:
       model = models.Game
 class UserSerializer(serializers.ModelSerializer):
+   name = serializers.CharField(source='get_full_name')
+   displayname = serializers.CharField(source='profile.displayname')
    class Meta:
       model = User
-      fields = ('url', 'username', 'email', 'get_full_name', 'character_set')
+      fields = ('username', 'email', 'name', 'displayname', 'character_set')
+      lookup_field = 'username'
 
 # ViewSets define the view behavior.
 class CharacterViewSet(viewsets.ModelViewSet):
@@ -25,6 +28,7 @@ class GameViewSet(viewsets.ModelViewSet):
 class UserViewSet(viewsets.ModelViewSet):
    queryset = User.objects.all()
    serializer_class = UserSerializer
+   lookup_field = 'username'
 
 # Register actual routes when called by master urls.py
 def addRoutes(router):

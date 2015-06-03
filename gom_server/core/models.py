@@ -8,6 +8,19 @@ class Game(models.Model):
    def __str__(self):
       return self.name
 
+# Class for User Profile information
+class UserProfile(models.Model):
+   user = models.OneToOneField(User)
+   displayname = models.CharField(max_length=50)
+   def __str__(self):
+      return str(self.user)
+def suggest_displayname(user):
+   if user.first_name == '' and user.last_name == '':
+      return 'Unspecified Name'
+   else:
+      return user.first_name + ' ' + user.last_name[0] + '.'
+User.profile = property(lambda u: UserProfile.objects.get_or_create(user=u, defaults={'displayname': suggest_displayname(u)})[0])
+
 # Class for a Character
 class Character(models.Model):
    user = models.ForeignKey(User)
