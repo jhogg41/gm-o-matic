@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     # Third-part frameworks
     'allauth',
     'allauth.account',
@@ -66,7 +67,7 @@ ROOT_URLCONF = 'gom_server.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['/home/jhogg/gm-o-matic/gom_server/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -113,6 +114,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = '/home/jhogg/gm-o-matic/gom_server/static'
 
+ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_FORMS = {
    'signup': 'core.forms.SignupForm'
 }
@@ -127,3 +129,5 @@ REST_FRAMEWORK = {
       'rest_framework.authentication.TokenAuthentication',
    ),
 }
+
+SITE_ID = 1
