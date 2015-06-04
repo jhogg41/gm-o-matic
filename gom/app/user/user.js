@@ -58,6 +58,8 @@ function($location, AuthService) {
          password1: this.password,
          password2: this.password2,
          email: this.email,
+         terms: this.terms,
+         cat: this.cat
       }, regForm);
    };
 }])

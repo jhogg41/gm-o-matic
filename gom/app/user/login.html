@@ -74,12 +74,22 @@
          <div ng-message='required'>This field is required.</div>
       </div>
    </md-input-container>
-   <md-checkbox ng-model='login.terms' aria-label='Agree to Terms and Conditions'>
-      I agree to the website <a href='/terms'>Terms and Conditions</a>
-   </md-checkbox>
-   <md-checkbox ng-model='login.cat' aria-label='Agree to CAT Policy'>
-      I agree to abide by the OURPGSoc <a href='http://users.ox.ac.uk/~rpgsoc/policies.shtml'>Conduct and Acceptable Themes (CAT) Policy</a>
-   </md-checkbox>
+   <md-input-container>
+      <md-checkbox ng-model='login.terms' aria-label='Agree to Terms and Conditions' name='terms' required>
+         I agree to the website <a href='/terms'>Terms and Conditions</a>
+      </md-checkbox>
+      <div ng-messages='regForm.terms.$error'>
+         <div ng-message='server'>You must agree to the terms and conditions to register.</div>
+      </div>
+   </md-input-container>
+   <md-input-container>
+      <md-checkbox ng-model='login.cat' aria-label='Agree to CAT Policy' name='cat' required class='ng-pristine'>
+         I agree to abide by the OURPGSoc <a href='http://users.ox.ac.uk/~rpgsoc/policies.shtml'>Conduct and Acceptable Themes (CAT) Policy</a>
+      </md-checkbox>
+      <div ng-messages='regForm.cat.$error'>
+         <div ng-message='server'>You must agree to the CAT policy to register.</div>
+      </div>
+   </md-input-container>
    <div flex layout='row'>
       <md-button class='md-raised md-primary' ng-click='login.register(regForm)' type='submit'>
          Register
