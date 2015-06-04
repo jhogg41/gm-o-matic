@@ -32,27 +32,33 @@ angular.module('gomApp.user', [
 function($location, AuthService) {
    var lc = this;
    this.username = AuthService.username;
-   this.name = '';
+   this.first_name = '';
+   this.last_name = '';
    this.password = '';
    this.password2 = '';
    this.email = '';
    this.terms = false;
    this.cat = false;
+   this.errors = [];
    this.login = function() {
       AuthService.login(lc.username, lc.password,
          function() {
             $location.url('/');
          },
          function(msg) {
-            lc.error.failed = true;
+            lc.errors.failed = true;
          }
       );
    };
-   this.register = function() {
-      window.alert('Register!\n');
-   };
-   this.error = {
-      failed: false
+   this.register = function(regForm) {
+      AuthService.register({
+         username: this.username,
+         first_name: this.first_name,
+         last_name: this.last_name,
+         password1: this.password,
+         password2: this.password2,
+         email: this.email,
+      }, regForm);
    };
 }])
 
@@ -77,7 +83,12 @@ function($cookies, $http, $resource, $rootScope) {
       logout: {
          method: 'POST',
          url: '/api/rest-auth/logout\\/'
-      }
+      },
+      register: {
+         method: 'POST',
+         url: 'api/rest-auth/registration',
+         isArray: false
+      },
    });
    this.login = function(username, password, success, error) {
       AuthAPI.login({username:username, password:password},
@@ -99,6 +110,21 @@ function($cookies, $http, $resource, $rootScope) {
                if(error) error('Bad username or password');
             } else {
                if(error) error('Unknown error: login failed but no reason returned');
+            }
+         }
+      );
+   };
+   this.register = function(data,form) {
+      AuthAPI.register(data,
+         function(response) {
+            window.alert('Registration success!');
+         },
+         function(response) {
+            for(var key in response.data) {
+               if(response.data.hasOwnProperty(key)) {
+                  form[key].$setValidity('server', false);
+                  form[key].serverError = response.data[key][0];
+               }
             }
          }
       );

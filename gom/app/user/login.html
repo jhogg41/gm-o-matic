@@ -1,7 +1,7 @@
 <md-tabs md-dynamic-height='true'>
 <md-tab id="login">
    <md-tab-label>Login</md-tab-label>
-   <md-tab-body><form>
+   <md-tab-body><ng-form name='loginForm'>
    <md-input-container>
       <label>Username</label>
       <input ng-model='login.username'>
@@ -10,7 +10,7 @@
       <label>Password</label>
       <input ng-model='login.password' type='password'>
    </md-input-container>
-   <div ng-messages="login.error" role="alert">
+   <div ng-messages="login.errors" role="alert">
       <div ng-message="failed">Bad username or password</div>
    </div>
    <div flex layout='row'>
@@ -21,30 +21,58 @@
          Login
       </md-button>
    </div>
-   </form></md-tab-body>
+   </ng-form></md-tab-body>
 </md-tab>
 <md-tab id="register">
    <md-tab-label>Register</md-tab-label>
-   <md-tab-body><form>
+   <md-tab-body><ng-form name='regForm'>
    <md-input-container>
       <label>Username</label>
-      <input ng-model='login.username'>
+      <input ng-model='login.username' name='username' ng-required>
+      <div ng-messages='regForm.username.$error'>
+         <div ng-message='server'>{{regForm.username.serverError}}</div>
+         <div ng-message='required'>This field is required.</div>
+      </div>
    </md-input-container>
    <md-input-container>
-      <label>Real name (so GMs know who you are)</label>
-      <input ng-model='login.name'>
+      <label>First name</label>
+      <input ng-model='login.first_name' name='first_name' ng-required>
+      <div ng-messages='regForm.first_name.$error'>
+         <div ng-message='server'>{{regForm.first_name.serverError}}</div>
+         <div ng-message='required'>This field is required.</div>
+      </div>
+   </md-input-container>
+   <md-input-container>
+      <label>Last name</label>
+      <input ng-model='login.last_name' name='last_name' ng-required>
+      <div ng-messages='regForm.last_name.$error'>
+         <div ng-message='server'>{{regForm.last_name.serverError}}</div>
+         <div ng-message='required'>This field is required.</div>
+      </div>
    </md-input-container>
    <md-input-container>
       <label>Email</label>
-      <input ng-model='login.email' type='email'>
+      <input ng-model='login.email' type='email' name='email' ng-required>
+      <div ng-messages='regForm.email.$error'>
+         <div ng-message='server'>{{regForm.email.serverError}}</div>
+         <div ng-message='required'>This field is required.</div>
+      </div>
    </md-input-container>
    <md-input-container>
       <label>Password</label>
-      <input ng-model='login.password' type='password'>
+      <input ng-model='login.password' type='password' name='password1' ng-required>
+      <div ng-messages='regForm.password1.$error'>
+         <div ng-message='server'>{{regForm.password1.serverError}}</div>
+         <div ng-message='required'>This field is required.</div>
+      </div>
    </md-input-container>
    <md-input-container>
       <label>Verify Password</label>
-      <input ng-model='login.password2' type='password'>
+      <input ng-model='login.password2' type='password' name='password2' ng-required>
+      <div ng-messages='regForm.password2.$error'>
+         <div ng-message='server'>{{regForm.password2.serverError}}</div>
+         <div ng-message='required'>This field is required.</div>
+      </div>
    </md-input-container>
    <md-checkbox ng-model='login.terms' aria-label='Agree to Terms and Conditions'>
       I agree to the website <a href='/terms'>Terms and Conditions</a>
@@ -53,10 +81,10 @@
       I agree to abide by the OURPGSoc <a href='http://users.ox.ac.uk/~rpgsoc/policies.shtml'>Conduct and Acceptable Themes (CAT) Policy</a>
    </md-checkbox>
    <div flex layout='row'>
-      <md-button class='md-raised md-primary' ng-click='login.register()' type='submit'>
+      <md-button class='md-raised md-primary' ng-click='login.register(regForm)' type='submit'>
          Register
       </md-button>
    </div>
-   </form></md-tab-body>
+   </ng-form></md-tab-body>
 </md-tab>
 </md-tabs>
