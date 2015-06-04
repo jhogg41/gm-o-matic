@@ -11,11 +11,10 @@ class GameSerializer(serializers.ModelSerializer):
    class Meta:
       model = models.Game
 class UserSerializer(serializers.ModelSerializer):
-   name = serializers.CharField(source='get_full_name')
    displayname = serializers.CharField(source='profile.displayname')
    class Meta:
       model = User
-      fields = ('username', 'email', 'name', 'displayname', 'character_set')
+      fields = ('username', 'email', 'first_name', 'last_name', 'displayname', 'character_set')
       lookup_field = 'username'
 
 # ViewSets define the view behavior.

@@ -113,6 +113,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = '/home/jhogg/gm-o-matic/gom_server/static'
 
+ACCOUNT_FORMS = {
+   'signup': 'core.forms.SignupForm'
+}
 REST_FRAMEWORK = {
    # Use Django's standard `django.contrib.auth` permissions,
    # or allow read-only access for unauthenticated users.
