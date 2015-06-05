@@ -15,10 +15,10 @@
 
 <!-- Background and Notes -->
 <h3>Background</h3>
-{{item.background}}
+{{char.background}}
 
 <h3>Notes</h3>
-{{item.notes}}
+{{char.notes}}
 
 <button ng-if="!char.submitted">Submit!</button>
 
@@ -26,5 +26,5 @@
 <div ng-if="user.is_gm(char)">
    <button>Approve!</button>
    <h3>GM-only Notes</h3>
-   {{item.gm_notes}}
+   {{char.gm_notes}}
 </div>
