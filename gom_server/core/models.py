@@ -5,6 +5,8 @@ from django.contrib.auth.models import User
 # Class for a Game
 class Game(models.Model):
    name = models.CharField(max_length=50)
+   summary = models.CharField(max_length=140)
+   description = models.TextField()
    def __str__(self):
       return self.name
 

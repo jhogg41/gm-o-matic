@@ -10,6 +10,10 @@ class CharacterSerializer(serializers.ModelSerializer):
 class GameSerializer(serializers.ModelSerializer):
    class Meta:
       model = models.Game
+      fields = ('id', 'name', 'summary')
+class GameDetailSerializer(serializers.ModelSerializer):
+   class Meta:
+      model = models.Game
 class UserSerializer(serializers.ModelSerializer):
    displayname = serializers.CharField(source='profile.displayname')
    class Meta:
@@ -23,7 +27,13 @@ class CharacterViewSet(viewsets.ModelViewSet):
    serializer_class = CharacterSerializer
 class GameViewSet(viewsets.ModelViewSet):
    queryset = models.Game.objects.all()
-   serializer_class = GameSerializer
+   serializers = {
+      'default': GameDetailSerializer,
+      'list': GameSerializer,
+   }
+   def get_serializer_class(self):
+      return self.serializers.get(self.action, self.serializers['default'])
+
 class UserViewSet(viewsets.ModelViewSet):
    queryset = User.objects.all()
    serializer_class = UserSerializer
