@@ -34,7 +34,7 @@ function($scope, GameService) {
 .service('GameService', [
 '$cookies', '$rootScope', 'djResource',
 function($cookies, $rootScope, djResource) {
-   var GameResource = djResource('/api/game/:id');
+   var GameResource = djResource('/api/game/:id', {id:'@id'});
 
    this.game = null;
    this.switchGame = function(id) {

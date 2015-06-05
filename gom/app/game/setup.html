@@ -1,1 +1,18 @@
-<md-subheader class='md-accent'>Game setup: {{gs.game.name}}</md-subheader>
+<md-subheader class='md-accent'>{{gs.game.name}} Game Setup</md-subheader>
+<ng-form name='gameForm'>
+   <md-input-container>
+      <label>Summary</label>
+      <input ng-model='gs.game.summary' name='summary' required md-maxlength='140' gom-async-save='gs.game'>
+      <div ng-messages='gameForm.summary.$error'>
+         <div ng-message='required'>This field is required.</div>
+         <div ng-message='md-maxlength'>This field can be at most 140 characters</div>
+      </div>
+   </md-input-container>
+   <md-input-container>
+      <label>Description</label>
+      <textarea ng-model='gs.game.description' name='description' required gom-async-save='gs.game'>
+      <div ng-messages='gameForm.description.$error'>
+         <div ng-message='required'>This field is required.</div>
+      </div>
+   </md-input-container>
+</ng-form>

@@ -7,6 +7,7 @@ angular.module('gomApp', [
    'ngMessages',
    'djangoRESTResources',
    'gomApp.character',
+   'gomApp.formUtil',
    'gomApp.game',
    'gomApp.meta',
    'gomApp.user',
