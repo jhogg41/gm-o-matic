@@ -11,7 +11,7 @@ VTYPE_CHOICES = (
 class AttributeType(models.Model): 
    game = models.ForeignKey(core.models.Game)
    title = models.CharField(max_length=50)
-   short_desc = models.CharField(max_length=400)
+   short_desc = models.CharField(max_length=400, blank=True)
    def __str__(self):
       return self.game.name + ': ' + self.title
 
