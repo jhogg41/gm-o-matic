@@ -19,6 +19,7 @@
 </head>
 
 <body layout="column" ng-controller="MetaCtrl as meta">
+<div id='wrapper'>
    <md-toolbar layout="row">
       <div class="md-toolbar-tools">
          <md-button ng-click="meta.toggleMenu()" class="md-icon-button" aria-label="Menu" hide-gt-md>
@@ -44,9 +45,12 @@
    </md-toolbar>
    <div id="main" layout="row" flex>
    <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-is-locked-open="$mdMedia('gt-md')" md-component-id="menu" layout="column">
-      <md-button ng-href="#/characters">Character List</md-button>
-      <md-button ng-href="#/turnsheet">Turnsheet</md-button>
-      <md-button ng-href="#/workflow">GM Workflow</md-button>
+      <md-subheader>Player Actions</md-subheader>
+      <md-button ng-href="/#/characters">Character List</md-button>
+      <md-button ng-href="/#/turnsheet">Turnsheet</md-button>
+      <md-subheader>GM Actions</md-subheader>
+      <md-button ng-href='/#/game/setup'>Game Setup</md-button>
+      <md-button ng-href="/#/workflow">GM Workflow</md-button>
    </md-sidenav>
 
    <md-content flex layout="column" id="content" ng-view>
@@ -74,7 +78,8 @@
    <script src="user/user.js"></script>
    <script src="components/formUtil/formUtil.js"></script>
 
-   </div>
+   </div> <!-- div main -->
 
+</div> <!-- div wrapper -->
 </body>
 </html>

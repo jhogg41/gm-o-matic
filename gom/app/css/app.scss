@@ -5,6 +5,11 @@
 .material-icons.md-36 { font-size: 36px; }
 .material-icons.md-48 { font-size: 48px; }
 
+/* Gird the app to a sane width */
+div#wrapper {
+   max-width: 1200px;
+};
+
 /* Ensure sidenav sits below toolbar */
 div#main { position: relative; }
 
@@ -39,4 +44,17 @@ div#main { position: relative; }
 .logout-button {
    position: relative;
    top: -8px;
+}
+
+/* Styling for single line edit fields with buttons */
+h2.inline-label {
+   position: absolute;
+   bottom: 0;
+   left: 0;
+   margin: 0;
+   font-weight: bold;
+   text-transform: uppercase;
+   line-height: 45px;
+   white-space: nowrap;
+   vertical-align: middle;
 }

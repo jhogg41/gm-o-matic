@@ -21,11 +21,29 @@ angular.module('gomApp.game', [
 .controller('GameSetupController', [
 '$scope', 'GameService',
 function($scope, GameService) {
+   this.resetForGame = function(game) {
+      this.game = game;
+      this.newClassName = '';
+      this.attrClasses = [
+         {
+            name: 'Skilleg',
+         },
+         {
+            name: 'Quirkeg',
+         }
+      ];
+   };
+   this.addNewAttrClass = function() {
+      this.attrClasses.push({
+         name: this.newClassName
+      });
+      this.newClassName = '';
+   };
+
+   this.resetForGame(GameService.game);
+
    var gc = this;
-   gc.game = GameService.game;
-   $scope.$on('game:changed', function(event, id) {
-      gc.game = GameService.game;
-   });
+   $scope.$on('game:changed', gc.resetForGame(GameService.game));
 }])
 
 /*********************************************************
