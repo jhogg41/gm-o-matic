@@ -17,7 +17,11 @@ class AttributesViewSet(viewsets.ModelViewSet):
    def get_queryset(self):
       gameid = self.kwargs['gameid']
       return models.AttributeType.objects.filter(game=gameid)
+class AttributeDetailViewSet(viewsets.ModelViewSet):
+   serializer_class = AttributeSerializer
+   queryset = models.Attribute.objects.all()
 
 # Register actual routes when called by master urls.py
 def addRoutes(router):
    router.register(r'attrib/(?P<gameid>[0-9]+)', AttributesViewSet, base_name='attributes')
+   router.register(r'attrib-detail', AttributeDetailViewSet)
