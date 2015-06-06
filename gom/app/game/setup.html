@@ -3,7 +3,7 @@
 <ng-form name='gameForm'>
    <md-input-container>
       <label>Summary</label>
-      <input ng-model='gs.game.summary' name='summary' required md-maxlength='140' gom-async-save='gs.game'>
+      <input ng-model='gs.game.summary' name='summary' required md-maxlength='140' gom-blur-save='gs.game'>
       <div ng-messages='gameForm.summary.$error'>
          <div ng-message='required'>This field is required.</div>
          <div ng-message='md-maxlength'>This field can be at most 140 characters</div>
@@ -11,7 +11,7 @@
    </md-input-container>
    <md-input-container>
       <label>Description</label>
-      <textarea ng-model='gs.game.description' name='description' required gom-async-save='gs.game'></textarea>
+      <textarea ng-model='gs.game.description' name='description' required gom-blur-save='gs.game'></textarea>
       <div ng-messages='gameForm.description.$error'>
          <div ng-message='required'>This field is required.</div>
       </div>
@@ -26,12 +26,12 @@
       <h2 class='md-accent'>Attribute Class</h2>
       <md-input-container class='md-accent'>
          <label>Class Name</label>
-         <input ng-model='class.title' gom-async-save='class' gom-async-save-label='{{class.title}}'>
+         <input ng-model='class.title' gom-blur-save='class' gom-save-label='{{class.title}}'>
       </md-input-container>
    </div>
    <md-input-container class='md-accent'>
       <label>Class description</label>
-      <input ng-model='class.short_desc' gom-async-save='class' gom-async-save-label='{{class.title}}'>
+      <input ng-model='class.short_desc' gom-blur-save='class' gom-save-label='{{class.title}}'>
    </md-input-container>
    <div ng-repeat='attr in class.attributes'>
       <div layout='row' layout-wrap>
@@ -40,27 +40,27 @@
          </md-button>
          <md-input-container>
             <label>Attribute Name</label>
-            <input ng-model='attr.name'>
+            <input ng-model='attr.name' gom-blur-save='attr' gom-save-label='{{attr.name}}'>
          </md-input-container>
-         <md-select placeholder='Type' ng-model='attr.vtype'>
+         <md-select placeholder='Type' ng-model='attr.vtype' gom-change-save='attr' gom-save-label='{{attr.name}}'>
             <md-option value='bool'>Boolean</md-option>
             <md-option value='int'>Integer</md-option>
          </md-select>
          <md-input-container ng-if="attr.vtype == 'int'">
             <label>Min Value</label>
-            <input type='number' ng-model='attr.minVal'>
+            <input type='number' ng-model='attr.minVal' gom-blur-save='attr' gom-save-label='{{attr.name}}'>
          </md-input-container>
          <md-input-container ng-if="attr.vtype == 'int'">
             <label>Max Value</label>
-            <input type='number' ng-model='attr.maxVal'>
+            <input type='number' ng-model='attr.maxVal' gom-blur-save='attr' gom-save-label='{{attr.name}}'>
          </md-input-container>
-         <md-checkbox ng-model='attr.req_desc'>
+         <md-checkbox ng-model='attr.req_desc' gom-change-save='attr' gom-save-label='{{attr.name}}'>
             Require description from player
          </md-checkbox>
       </div>
       <md-input-container>
          <label>Description</label>
-         <textarea ng-model='attr.desc'></textarea>
+         <textarea ng-model='attr.desc' gom-blur-save='attr' gom-save-label='{{attr.name}}'></textarea>
       </md-input-container>
    </div>
    <md-divider ng-if='!$last'>

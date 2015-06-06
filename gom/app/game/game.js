@@ -31,9 +31,8 @@ function($mdDialog, $scope, GameService) {
       }
    };
    this.addNewAttrClass = function() {
-      this.attrClasses.push({
-         title: this.newClassName
-      });
+      var newClass = GameService.addNewAttrClass({title: this.newClassName});
+      this.attrClasses.push(newClass);
       this.newClassName = '';
    };
    this.deleteAttrClass = function(ac) {
@@ -45,8 +44,9 @@ function($mdDialog, $scope, GameService) {
          .ok('DELETE!')
          .cancel('Cancel');
       $mdDialog.show(delConfirm).then(function() {
-            window.alert('FINE!');
-            //ac.$delete();
+            ac.$delete();
+            var idx = gc.attrClasses.indexOf(ac);
+            gc.attrClasses.splice(idx, 1);
          });
    };
 
@@ -68,6 +68,7 @@ function($cookies, $rootScope, djResource) {
       gameid:'@game', // Game we're interested in
       acid:'@id'      // Attribute Class ID we want in particular
    });
+   var GameAttrDetailResource = djResource('/api/attrib-detail/:id/', {id:'@id'});
 
    this.game = null;
    this.switchGame = function(id) {
@@ -78,7 +79,23 @@ function($cookies, $rootScope, djResource) {
    };
    this.listAll = GameResource.query;
    this.getAttr = function(gid) {
-      return GameAttrResource.query({gameid: gid});
+      var save_attr_fn = function(successFn, errorFn) {
+         GameAttrDetailResource.save(this, successFn, errorFn);
+      };
+      var attr = GameAttrResource.query({gameid: gid}, function() {
+         for(var i=0; i<attr.length; i++) {
+            var aclass = attr[i];
+            for(var j=0; j<aclass.attributes.length; j++) {
+               var attribute = aclass.attributes[j];
+               attribute.$save = save_attr_fn;
+            }
+         }
+      });
+      return attr;
+   };
+   this.addNewAttrClass = function(ac) {
+      ac.game = ac.game || this.game.id;
+      return GameAttrResource.save(ac);
    };
 
    var gameid = $cookies.get('game:id');
