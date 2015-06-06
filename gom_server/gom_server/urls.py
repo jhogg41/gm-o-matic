@@ -17,9 +17,11 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from rest_framework import routers
 import core.router
+import char_attr.router
 
 router = routers.DefaultRouter()
 core.router.addRoutes(router)
+char_attr.router.addRoutes(router)
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
