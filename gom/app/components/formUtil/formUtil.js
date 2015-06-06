@@ -22,10 +22,11 @@ function($mdToast) {
             if(ngModelCtrl.$pristine) return; // Hasn't changed
             ngModelCtrl.$validate(); // Run validator before check we're valid
             if(ngModelCtrl.$invalid) return; // Don't commit, is wrong
+            var label = (attr.gomAsyncSaveLabel || ngModelCtrl.$name);
             getDescProp(scope,targetId).$save(function() {
                $mdToast.show($mdToast.simple()
-                  .content('Saved ' + ngModelCtrl.$name)
-                  .hideDelay(300)
+                  .content('Saved ' + label)
+                  .hideDelay(500)
                );
             });
             ngModelCtrl.$setPristine();
