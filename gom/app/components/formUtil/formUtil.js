@@ -22,14 +22,12 @@ function($mdToast) {
             if(ngModelCtrl.$pristine) return; // Hasn't changed
             ngModelCtrl.$validate(); // Run validator before check we're valid
             if(ngModelCtrl.$invalid) return; // Don't commit, is wrong
-            getDescProp(scope,targetId)
-               .$save().$promise
-               .then(function() {
-                  $mdToast.show($mdToast.simple()
-                     .content('Saved ' + ngModelCtrl.$name)
-                     .hideDelay(300)
-                  );
-               });
+            getDescProp(scope,targetId).$save(function() {
+               $mdToast.show($mdToast.simple()
+                  .content('Saved ' + ngModelCtrl.$name)
+                  .hideDelay(300)
+               );
+            });
             ngModelCtrl.$setPristine();
          });
       }
