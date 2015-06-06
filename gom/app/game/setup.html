@@ -1,3 +1,4 @@
+<section>
 <md-subheader class='md-accent'>{{gs.game.name}} Game Setup</md-subheader>
 <ng-form name='gameForm'>
    <md-input-container>
@@ -16,12 +17,54 @@
       </div>
    </md-input-container>
 </ng-form>
-<md-subheader class='md-accent'>Attributes</md-subheader>
-<md-tabs>
-   <md-tab ng-repeat='class in gs.attrClasses' label='{{class.name}}'>
-      <div>Stuff and things</div>
-   </md-tab>
-</md-tabs>
+</section>
+<section ng-repeat='class in gs.attrClasses'>
+   <div layout='row'>
+      <md-button class='md-icon-button md-accent' ng-click='gs.deleteAttrClass(class)'>
+         <i class='material-icons md-36'>delete</i>
+      </md-button>
+      <h2 class='md-accent'>Attribute Class</h2>
+      <md-input-container class='md-accent'>
+         <label>Class Name</label>
+         <input ng-model='class.title' gom-async-save='class' gom-async-save-label='{{class.title}}'>
+      </md-input-container>
+   </div>
+   <md-input-container class='md-accent'>
+      <label>Class description</label>
+      <input ng-model='class.short_desc' gom-async-save='class' gom-async-save-label='{{class.title}}'>
+   </md-input-container>
+   <div ng-repeat='attr in class.attributes'>
+      <div layout='row' layout-wrap>
+         <md-button class='md-icon-button md-primary' ng-click='gs.deleteAttr(attr)'>
+            <i class='material-icons md-36'>delete</i>
+         </md-button>
+         <md-input-container>
+            <label>Attribute Name</label>
+            <input ng-model='attr.name'>
+         </md-input-container>
+         <md-select placeholder='Type' ng-model='attr.vtype'>
+            <md-option value='bool'>Boolean</md-option>
+            <md-option value='int'>Integer</md-option>
+         </md-select>
+         <md-input-container ng-if="attr.vtype == 'int'">
+            <label>Min Value</label>
+            <input type='number' ng-model='attr.minVal'>
+         </md-input-container>
+         <md-input-container ng-if="attr.vtype == 'int'">
+            <label>Max Value</label>
+            <input type='number' ng-model='attr.maxVal'>
+         </md-input-container>
+         <md-checkbox ng-model='attr.req_desc'>
+            Require description from player
+         </md-checkbox>
+      </div>
+      <md-input-container>
+         <label>Description</label>
+         <textarea ng-model='attr.desc'></textarea>
+      </md-input-container>
+   </div>
+   <md-divider ng-if='!$last'>
+</section>
 <form ng-submit='gs.addNewAttrClass()' class='md-padding' style='padding-top: 0;'><div layout='row'>
    <div flex style='position: relative;'>
       <h2 class='md-subhead inline-label'>Add new attribute class:</h2>
