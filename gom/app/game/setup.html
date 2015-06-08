@@ -63,6 +63,16 @@
          <textarea ng-model='attr.desc' gom-blur-save='attr' gom-save-label='{{attr.name}}'></textarea>
       </md-input-container>
    </div>
+   <form ng-submit='gs.addNewAttr(class)' class='md-padding' style='padding-top: 0;'><div layout='row'>
+      <div flex style='position: relative;'>
+         <h2 class='md-subhead inline-label'>Add new attribute:</h2>
+      </div>
+      <md-input-container>
+         <label>Attribute Name (e.g. Combat)</label>
+         <input type='text' name='attrName' ng-model='class.newAttrName'>
+      </md-input-container>
+      <md-button class='md-accent md-raised' ng-disabled='!class.newAttrName' aria-label='Add Attribute' type='submit'>Add Attribute</md-button>
+   </div></form>
    <md-divider ng-if='!$last'>
 </section>
 <form ng-submit='gs.addNewAttrClass()' class='md-padding' style='padding-top: 0;'><div layout='row'>

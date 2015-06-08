@@ -49,6 +49,15 @@ function($mdDialog, $scope, GameService) {
             gc.attrClasses.splice(idx, 1);
          });
    };
+   this.addNewAttr = function(ac) {
+      var newAttr = ac.addNewAttr(ac.newAttrName);
+      ac.newAttrName = '';
+   };
+   this.deleteAttr = function(ac, attr) {
+      attr.$delete();
+      var idx = ac.attributes.indexOf(attr);
+      ac.attributes.splice(idx, 1);
+   };
 
    this.resetForGame(GameService.game);
 
@@ -82,13 +91,35 @@ function($cookies, $rootScope, djResource) {
       var save_attr_fn = function(successFn, errorFn) {
          GameAttrDetailResource.save(this, successFn, errorFn);
       };
+      var delete_attr_fn = function(successFn, errorFn) {
+         GameAttrDetailResource.delete(this, successFn, errorFn);
+      };
+      var decorate_attribute = function(attr) {
+         attr.$save = save_attr_fn;
+         attr.$delete = delete_attr_fn;
+      };
+      var add_attr_fn = function(name) {
+         var ac = this;
+         var attr = GameAttrDetailResource.save(
+            {
+               atype: this.id,
+               name: name
+            },
+            function() {
+               ac.attributes.push(attr);
+               decorate_attribute(attr);
+            }
+         );
+      };
       var attr = GameAttrResource.query({gameid: gid}, function() {
          for(var i=0; i<attr.length; i++) {
             var aclass = attr[i];
             for(var j=0; j<aclass.attributes.length; j++) {
                var attribute = aclass.attributes[j];
-               attribute.$save = save_attr_fn;
+               decorate_attribute(attribute);
             }
+            aclass.addNewAttr = add_attr_fn;
+            aclass.newAttrName = '';
          }
       });
       return attr;
