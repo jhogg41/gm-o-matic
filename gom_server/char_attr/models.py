@@ -30,14 +30,16 @@ class CostPair(models.Model):
       return self.model.name+'('+self.value+', '+self.price+')'
 
 # Class describing a basic attribute
+def get_default_cost_model():
+   return CostModel.objects.get(name='Linear')
 class Attribute(models.Model):
    atype = models.ForeignKey(AttributeType, related_name='attributes')
-   vtype = models.CharField(max_length=5, choices=VTYPE_CHOICES)
+   vtype = models.CharField(max_length=5, choices=VTYPE_CHOICES, default='bool')
    name = models.CharField(max_length=50)
-   desc = models.TextField()
-   req_desc = models.BinaryField()
-   costModel = models.ForeignKey(CostModel)
-   minVal = models.IntegerField()
-   maxVal = models.IntegerField()
+   desc = models.TextField(blank=True)
+   req_desc = models.BinaryField(default=False)
+   costModel = models.ForeignKey(CostModel, default=get_default_cost_model)
+   minVal = models.IntegerField(default=0)
+   maxVal = models.IntegerField(default=5)
    def __str__(self):
       return self.name + ' ('+str(self.atype)+')'
