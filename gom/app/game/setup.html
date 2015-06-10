@@ -35,7 +35,7 @@
    </md-input-container>
    <div ng-repeat='attr in class.attributes'>
       <div layout='row' layout-wrap>
-         <md-button class='md-icon-button md-primary' ng-click='gs.deleteAttr(attr)'>
+         <md-button class='md-icon-button md-primary' ng-click='gs.deleteAttr(class, attr)'>
             <i class='material-icons md-36'>delete</i>
          </md-button>
          <md-input-container>
