@@ -37,7 +37,7 @@ class Attribute(models.Model):
    vtype = models.CharField(max_length=5, choices=VTYPE_CHOICES, default='bool')
    name = models.CharField(max_length=50)
    desc = models.TextField(blank=True)
-   req_desc = models.BinaryField(default=False)
+   req_desc = models.BooleanField(default=False)
    costModel = models.ForeignKey(CostModel, default=get_default_cost_model)
    minVal = models.IntegerField(default=0)
    maxVal = models.IntegerField(default=5)
