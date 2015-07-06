@@ -49,6 +49,8 @@ INSTALLED_APPS = (
     # GOM code
     'core',
     'char_attr',
+    'plot',
+    'turnsheet',
 )
 
 MIDDLEWARE_CLASSES = (
