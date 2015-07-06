@@ -30,3 +30,8 @@ class Character(models.Model):
    name = models.CharField(max_length=200)
    def __str__(self):
       return self.name + '(' + self.game.name + ': ' + self.user.get_full_name() + ')'
+
+# Class for a specific Turn of the game
+class Turn(models.Model):
+   game = models.ForeignKey(Game)
+   name = models.CharField(max_length=50)
