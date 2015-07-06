@@ -14,12 +14,15 @@ angular.module('gomApp.character', ['ngRoute'])
   $routeProvider.when('/character/new', {
     templateUrl: 'character/newchar.html',
     controller: 'NewCharacterCtrl',
-    controllerAs: 'char'
+    controllerAs: 'ncc'
   });
 }])
 
-.controller('NewCharacterCtrl', [function() {
-
+.controller('NewCharacterCtrl', [
+'GameService',
+function(GameService) {
+   var ncc = this;
+   ncc.acs = GameService.getAttr(GameService.game.id);
 }])
 
 .controller('CharacterCtrl', [function() {

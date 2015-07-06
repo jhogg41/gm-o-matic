@@ -10,6 +10,18 @@ angular.module('gomApp.formUtil', [
    'ngMaterial'
 ])
 
+.directive('gomAttrSelect', [
+function() {
+   return {
+      restrict: 'E',
+      templateUrl: 'components/formUtil/gomAttrSelect.html',
+      scope: {
+         attr: '=',
+         model: '=',
+      },
+   };
+}])
+
 .directive('gomBlurSave', [
 '$mdToast',
 function($mdToast) {

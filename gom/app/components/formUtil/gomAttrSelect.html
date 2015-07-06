@@ -1,0 +1,9 @@
+<div class='gom-attr-select'>
+   <div layout='row'>
+      <span flex='20' class='attr-name'>{{attr.name}}</span>
+      <span flex='70' class='attr-desc' ng-if='attr.desc.length > 0'>{{attr.desc}}</span>
+      <md-switch flex ng-model='model' aria-label='{{attr.name}}' ng-if='attr.vtype=="bool"'></md-switch>
+      <span ng-if='attr.vtype=="int"' class='attr-val'>{{model}}</span>
+   </div>
+   <md-slider flex md-discrete min='{{attr.minVal}}' max='{{attr.maxVal}}' ng-model='model' aria-label='{{attr.name}}' ng-if='attr.vtype=="int"'></md-slider>
+</div>

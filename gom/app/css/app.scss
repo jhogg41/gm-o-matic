@@ -8,10 +8,12 @@
 /* Gird the app to a sane width */
 div#wrapper {
    max-width: 1200px;
-};
+}
 
 /* Ensure sidenav sits below toolbar */
-div#main { position: relative; }
+div#main {
+   position: relative;
+}
 
 /* Ensure toolbar buttons display correctly */
 .game-button {
@@ -57,4 +59,15 @@ h2.inline-label {
    line-height: 45px;
    white-space: nowrap;
    vertical-align: middle;
+}
+
+/* Character attribute editor */
+div.gom-attr-select {
+   padding: 5px;
+   border-bottom: 1px solid;
+   margin-bottom: 5px;
+
+   span.attr-name {
+      font-weight: bold;
+   }
 }

@@ -1,2 +1,9 @@
-<md-subheader class='md-accent'>Submit New Character</md-subheader>
-Mumble mumble magic
+<h2>Submit New Character</h2>
+<md-input-container>
+   <label>Name</label>
+   <input required>
+</md-input-container>
+<section ng-repeat='ac in ncc.acs'>
+   <md-subheader class='md-accent'>{{ac.title}}</md-subheader>
+   <gom-attr-select ng-repeat='attr in ac.attributes' attr='attr' model='ncc.char.val[attr.id]'>
+</section>
